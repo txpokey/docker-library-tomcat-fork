@@ -145,7 +145,7 @@ RUN set -eux; \
 	\
 # sh removes env vars it doesn't support (ones with periods)
 # https://github.com/docker-library/tomcat/issues/77
-	find ./bin/ -name '*.sh' -exec sed -ri 's|^#!/bin/sh$|#!/usr/bin/env bash|' '{}' +
+find ./bin/ -name '*.sh' -print | xargs sed -ri 's|^#!/bin/sh$|#!/usr/bin/env bash|' 
 
 # verify Tomcat Native is working properly
 RUN set -e \
@@ -157,5 +157,5 @@ RUN set -e \
 		exit 1; \
 	fi
 
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+#EXPOSE 8080
+#CMD ["catalina.sh", "run"]
